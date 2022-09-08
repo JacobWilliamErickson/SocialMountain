@@ -1,8 +1,9 @@
 import {useState, useContext} from 'react'
 import AuthContext from '../store/authContext'
 import axios from 'axios'
+import swal from 'sweetalert'
 const Auth = () => {
-    const url ='https://socialmtn.devmountain.com'
+    const url ='//localhost:4004'
     const authCtx = useContext(AuthContext)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
@@ -20,6 +21,7 @@ const Auth = () => {
             authCtx.login(data.token, data.exp, data.userId)
         })
         .catch(err => {
+            swal("Whoops",err.response.data,'error')
             setPassword('')
             setUsername('')
         })
